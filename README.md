@@ -21,7 +21,7 @@ This is a common recording system designed to facilitate recording processes in 
 ### Running the Application
 To run the application, use the following command:
 ```bash
-streamlit run main.py
+streamlit run app/streamlit_app.py
 ```
 
 ### LAN Access
