@@ -84,13 +84,12 @@ def run_end_of_day_sweep(ledger: JsonLedger, memo: str = "end_of_day") -> SweepR
 
 
 def export_distribution_batch_json(result: SweepResult) -> dict:
-    """
-    Output format meant to be imported/broadcast by CCM clients.
-    """
+    items = [{"to": tx["receiverId"], "amountMinor": int(tx["amountMinor"])} for tx in result.distributions]
     return {
         "type": "crps_distribution_batch_v1",
-        "poolId": POOL_ID,
-        "totalSweptMinor": result.total_swept_minor,
-        "totalSwept": money_minor_to_str(result.total_swept_minor),
-        "transactions": result.distributions,
+        "unit": "Phoenix",
+        "symbol": "Φ",
+        "from": POOL_ID,
+        "totalSweptMinor": int(result.total_swept_minor),
+        "items": items,
     }
